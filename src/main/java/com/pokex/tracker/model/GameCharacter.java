@@ -15,18 +15,16 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Hunt {
+public class GameCharacter {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private RegionPokemon regionPokemon;
+    private String name;
+
+    private int level;
 
     @ManyToOne
-    private GameCharacter character;
-
-    private int duration;
-    private double loot;
+    private User user;
 }
