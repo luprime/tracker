@@ -16,12 +16,21 @@ public class PokemonService {
         this.repository = repository;
     }
 
-    public Pokemon save(Pokemon pokemon) {
+    public Pokemon create(Pokemon pokemon) {
+
+        if (pokemon.getName() == null || pokemon.getName().isBlank()) {
+            throw new RuntimeException("Nome do pokemon é obrigatório");
+        }
+
+        // 🔥 valida duplicado
+        if (repository.existsByNameIgnoreCase(pokemon.getName())) {
+            throw new RuntimeException("Pokemon já existe");
+        }
+
         return repository.save(pokemon);
     }
 
-    public List<Pokemon> findAll() {
+    public List<Pokemon> getAll() {
         return repository.findAll();
     }
-    
 }

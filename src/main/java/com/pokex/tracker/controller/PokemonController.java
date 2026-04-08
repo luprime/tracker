@@ -9,26 +9,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pokex.tracker.model.Pokemon;
-import com.pokex.tracker.repository.PokemonRepository;
+import com.pokex.tracker.service.PokemonService;
 
 
 @RestController
 @RequestMapping("/pokemons")
 public class PokemonController {
-    
-    private final PokemonRepository repository;
 
-    public PokemonController(PokemonRepository repository){
-        this.repository = repository;
+    private final PokemonService service;
+
+    public PokemonController(PokemonService service) {
+        this.service = service;
     }
 
     @PostMapping
     public Pokemon create(@RequestBody Pokemon pokemon) {
-        return repository.save(pokemon);
+        return service.create(pokemon);
     }
 
     @GetMapping
     public List<Pokemon> getAll() {
-        return repository.findAll();
+        return service.getAll();
     }
 }
