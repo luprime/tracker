@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
 
+import com.pokex.tracker.dto.RegionPokemonDTO;
 import com.pokex.tracker.model.RegionPokemon;
 import com.pokex.tracker.service.RegionPokemonService;
 
@@ -28,7 +29,7 @@ public class RegionPokemonController {
     }
 
     @GetMapping("/search")
-    public List<RegionPokemon> search(
+    public List<RegionPokemonDTO> search(
         @RequestParam(required = false) String pokemon,
         @RequestParam(required = false) String region
     ){

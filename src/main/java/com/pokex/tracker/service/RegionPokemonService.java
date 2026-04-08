@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.pokex.tracker.dto.RegionPokemonDTO;
 import com.pokex.tracker.model.Pokemon;
 import com.pokex.tracker.model.Region;
 import com.pokex.tracker.model.RegionPokemon;
@@ -62,24 +63,26 @@ public class RegionPokemonService {
         return repository.findAll();
     }
 
-    public List<RegionPokemon> search(String pokemon, String region) {
+    public List<RegionPokemonDTO> search(String pokemon, String region) {
 
-    // busca pelos dois
+    List<RegionPokemon> result;
+
     if (pokemon != null && region != null) {
-        return repository.findByPokemonNameIgnoreCaseAndRegionNameIgnoreCase(pokemon, region);
+        result = repository.findByPokemonNameIgnoreCaseAndRegionNameIgnoreCase(pokemon, region);
+    } else if (pokemon != null) {
+        result = repository.findByPokemonNameIgnoreCase(pokemon);
+    } else if (region != null) {
+        result = repository.findByRegionNameIgnoreCase(region);
+    } else {
+        throw new RuntimeException("Informe pokemon ou region");
     }
 
-    // só pokemon
-    if (pokemon != null) {
-        return repository.findByPokemonNameIgnoreCase(pokemon);
+    return result.stream()
+        .map(rp -> new RegionPokemonDTO(
+            rp.getPokemon().getName(),
+            rp.getRegion().getName(),
+            rp.getLevel()
+        ))
+        .toList();
     }
-
-    // só região
-    if (region != null) {
-        return repository.findByRegionNameIgnoreCase(region);
-    }
-
-    // nada informado
-    throw new RuntimeException("Informe pokemon ou region para busca");
-}
 }
