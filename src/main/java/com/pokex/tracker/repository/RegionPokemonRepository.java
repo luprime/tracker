@@ -2,6 +2,8 @@ package com.pokex.tracker.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.pokex.tracker.model.Pokemon;
+import com.pokex.tracker.model.Region;
 import com.pokex.tracker.model.RegionPokemon;
 import java.util.List;
 
@@ -21,5 +23,7 @@ public interface RegionPokemonRepository extends JpaRepository<RegionPokemon, Lo
     List<RegionPokemon> findByRegionNameIgnoreCase(String name);
 
     List<RegionPokemon> findByPokemonNameIgnoreCaseAndRegionNameIgnoreCase(String pokemon, String region);
+
+    boolean existsByPokemonAndRegion(Pokemon pokemon, Region region);
 
 }
