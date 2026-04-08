@@ -23,7 +23,7 @@ public class GameCharacter {
 
     private String name;
 
-    private int level;
+    private Integer level;
 
     @ManyToOne
     private User user;

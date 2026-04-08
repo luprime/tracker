@@ -27,6 +27,6 @@ public class Hunt {
     @ManyToOne
     private GameCharacter character;
 
-    private int duration;
-    private double loot;
+    private Integer duration; //colocar o tipo da classe como Integer, pq se for algum primitivo (int, double) e ele tentar colocar null, dará erro 400
+    private Double loot; //aqui mesma coisa, double não roda, Double roda se for null
 }

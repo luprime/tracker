@@ -20,5 +20,5 @@ public class RegionPokemon {
     @ManyToOne
     private Region region;
 
-    private int level;
+    private Integer level;
 }
