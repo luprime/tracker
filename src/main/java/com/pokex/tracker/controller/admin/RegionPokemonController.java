@@ -2,8 +2,6 @@ package com.pokex.tracker.controller.admin;
 
 import java.util.List;
 
-import javax.swing.text.StyledEditorKit.BoldAction;
-
 import org.springframework.web.bind.annotation.*;
 
 import com.pokex.tracker.dto.CreatePokemonWithRegionsRequest;
@@ -43,13 +41,12 @@ public class RegionPokemonController {
     {
         CreatePokemonWithRegionsRequest dto = new CreatePokemonWithRegionsRequest();
         dto.setPokemonName(pokemonName);
-        dto.setRegion(region); // ⚠️ IMPORTANTE
+        dto.setRegion(region);
         dto.setLevel(level);
-        dto.setShiny(shiny);
+        dto.setShiny(shiny != null ? shiny : false);
 
         service.createSingle(dto);
-        
 
-    return "Criado com sucesso";
+        return "Criado com sucesso";
     }
 }

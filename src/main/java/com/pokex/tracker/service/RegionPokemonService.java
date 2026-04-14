@@ -90,13 +90,15 @@ public class RegionPokemonService {
     public void createSingle(CreatePokemonWithRegionsRequest dto) {
 
     // 🔹 Busca ou cria Pokémon
+    String name = dto.getPokemonName().trim();
+
     Pokemon pokemon = pokemonRepository
-        .findByNameIgnoreCase(dto.getPokemonName())
+        .findByNameIgnoreCase(name)
         .orElseGet(() -> {
             Pokemon p = new Pokemon();
-            p.setName(dto.getPokemonName());
+            p.setName(name);
             return pokemonRepository.save(p);
-        });
+    });
 
     // 🔥 REGRA IMPORTANTE (VALIDAÇÃO DE REGIÃO)
     Region region = regionRepository
