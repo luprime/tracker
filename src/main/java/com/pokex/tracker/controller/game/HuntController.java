@@ -1,4 +1,4 @@
-package com.pokex.tracker.controller;
+package com.pokex.tracker.controller.game;
 
 import java.util.List;
 

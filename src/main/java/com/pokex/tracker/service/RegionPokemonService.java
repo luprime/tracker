@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.pokex.tracker.dto.CreatePokemonWithRegionsRequest;
 import com.pokex.tracker.dto.RegionPokemonDTO;
 import com.pokex.tracker.model.Pokemon;
 import com.pokex.tracker.model.Region;
@@ -85,4 +86,36 @@ public class RegionPokemonService {
         ))
         .toList();
     }
+
+    public void createSingle(CreatePokemonWithRegionsRequest dto) {
+
+    // 🔹 Busca ou cria Pokémon
+    Pokemon pokemon = pokemonRepository
+        .findByNameIgnoreCase(dto.getPokemonName())
+        .orElseGet(() -> {
+            Pokemon p = new Pokemon();
+            p.setName(dto.getPokemonName());
+            return pokemonRepository.save(p);
+        });
+
+    // 🔥 REGRA IMPORTANTE (VALIDAÇÃO DE REGIÃO)
+    Region region = regionRepository
+        .findByNameIgnoreCase(dto.getRegion())
+        .orElseThrow(() -> new RuntimeException("Região inválida: " + dto.getRegion()));
+
+
+    Boolean shiny = dto.getShiny() != null ? dto.getShiny() : false;
+    // 🔥 EVITAR DUPLICADO
+    if (repository.existsByPokemonIdAndRegionIdAndShiny(pokemon.getId(), region.getId(), shiny)) {
+        throw new RuntimeException("Esse pokemon já existe nessa região");
+    }
+
+    RegionPokemon rp = new RegionPokemon();
+    rp.setPokemon(pokemon);
+    rp.setRegion(region);
+    rp.setLevel(dto.getLevel());
+    rp.setShiny(shiny);
+
+    repository.save(rp);
+}
 }

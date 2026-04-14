@@ -1,4 +1,4 @@
-package com.pokex.tracker.controller;
+package com.pokex.tracker.controller.admin;
 
 import java.util.List;
 

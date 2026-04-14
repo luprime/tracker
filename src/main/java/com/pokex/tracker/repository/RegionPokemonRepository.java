@@ -24,6 +24,6 @@ public interface RegionPokemonRepository extends JpaRepository<RegionPokemon, Lo
 
     List<RegionPokemon> findByPokemonNameIgnoreCaseAndRegionNameIgnoreCase(String pokemon, String region);
 
-    boolean existsByPokemonAndRegion(Pokemon pokemon, Region region);
+    boolean existsByPokemonIdAndRegionIdAndShiny(Long pokemonId, Long regionId, Boolean shiny);
 
 }

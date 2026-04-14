@@ -21,4 +21,6 @@ public class RegionPokemon {
     private Region region;
 
     private Integer level;
+
+    private Boolean shiny = false;
 }
