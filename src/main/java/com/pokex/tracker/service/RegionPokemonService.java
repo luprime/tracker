@@ -82,7 +82,8 @@ public class RegionPokemonService {
         .map(rp -> new RegionPokemonDTO(
             rp.getPokemon().getName(),
             rp.getRegion().getName(),
-            rp.getLevel()
+            rp.getLevel(),
+            rp.getShiny()
         ))
         .toList();
     }
