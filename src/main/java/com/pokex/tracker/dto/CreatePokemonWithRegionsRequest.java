@@ -1,6 +1,8 @@
 package com.pokex.tracker.dto;
 
 
+import com.pokex.tracker.model.PokemonVariant;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -23,6 +25,6 @@ public class CreatePokemonWithRegionsRequest {
     @NotNull(message = "Level Obrigatório")
     private Integer level;
 
-    private Boolean shiny;
+    private PokemonVariant variant;
    
 }

@@ -1,21 +1,23 @@
 package com.pokex.tracker.dto;
 
+import com.pokex.tracker.model.PokemonVariant;
+
 public class RegionPokemonDTO {
 
     private String pokemon;
     private String region;
     private Integer level;
-    private Boolean shiny;
+    private PokemonVariant variant;
 
-    public RegionPokemonDTO(String pokemon, String region, Integer level, Boolean shiny) {
+    public RegionPokemonDTO(String pokemon, String region, Integer level, PokemonVariant variant) {
         this.pokemon = pokemon;
         this.region = region;
         this.level = level;
-        this.shiny = shiny;
+        this.variant = variant;
     }
 
     public String getPokemon() { return pokemon; }
     public String getRegion() { return region; }
     public Integer getLevel() { return level; }
-    public Boolean getShiny() { return shiny; }
+    public PokemonVariant getVariant() { return variant; }
 }

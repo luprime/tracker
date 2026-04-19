@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.pokex.tracker.dto.CreatePokemonWithRegionsRequest;
 import com.pokex.tracker.dto.RegionPokemonDTO;
+import com.pokex.tracker.model.PokemonVariant;
 import com.pokex.tracker.model.RegionPokemon;
 import com.pokex.tracker.service.RegionPokemonService;
 
@@ -37,13 +38,13 @@ public class RegionPokemonController {
         @RequestParam String pokemonName, 
         @RequestParam String region, 
         @RequestParam Integer level,
-        @RequestParam(required = false) Boolean shiny)
+        @RequestParam(required = false) PokemonVariant variant)
     {
         CreatePokemonWithRegionsRequest dto = new CreatePokemonWithRegionsRequest();
         dto.setPokemonName(pokemonName);
         dto.setRegion(region);
         dto.setLevel(level);
-        dto.setShiny(shiny != null ? shiny : false);
+        dto.setVariant(variant);
 
         service.createSingle(dto);
 

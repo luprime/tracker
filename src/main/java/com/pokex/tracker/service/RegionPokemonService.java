@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.pokex.tracker.dto.CreatePokemonWithRegionsRequest;
 import com.pokex.tracker.dto.RegionPokemonDTO;
 import com.pokex.tracker.model.Pokemon;
+import com.pokex.tracker.model.PokemonVariant;
 import com.pokex.tracker.model.Region;
 import com.pokex.tracker.model.RegionPokemon;
 import com.pokex.tracker.repository.PokemonRepository;
@@ -83,7 +84,7 @@ public class RegionPokemonService {
             rp.getPokemon().getName(),
             rp.getRegion().getName(),
             rp.getLevel(),
-            rp.getShiny()
+            rp.getVariant()
         ))
         .toList();
     }
@@ -107,17 +108,19 @@ public class RegionPokemonService {
         .orElseThrow(() -> new RuntimeException("Região inválida: " + dto.getRegion()));
 
 
-    Boolean shiny = dto.getShiny() != null ? dto.getShiny() : false;
-    // 🔥 EVITAR DUPLICADO
-    if (repository.existsByPokemonIdAndRegionIdAndShiny(pokemon.getId(), region.getId(), shiny)) {
+   PokemonVariant variant = dto.getVariant() != null ? dto.getVariant() : PokemonVariant.NORMAL;
+
+    if (repository.existsByPokemonIdAndRegionIdAndVariant(pokemon.getId(), region.getId(), variant)) {
         throw new RuntimeException("Esse pokemon já existe nessa região");
     }
+
+
 
     RegionPokemon rp = new RegionPokemon();
     rp.setPokemon(pokemon);
     rp.setRegion(region);
     rp.setLevel(dto.getLevel());
-    rp.setShiny(shiny);
+    rp.setVariant(variant);
 
     repository.save(rp);
 }

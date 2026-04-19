@@ -22,5 +22,6 @@ public class RegionPokemon {
 
     private Integer level;
 
-    private Boolean shiny = false;
+    @Enumerated(EnumType.STRING)
+    private PokemonVariant variant;
 }

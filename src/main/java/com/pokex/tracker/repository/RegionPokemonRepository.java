@@ -2,7 +2,7 @@ package com.pokex.tracker.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-
+import com.pokex.tracker.model.PokemonVariant;
 import com.pokex.tracker.model.RegionPokemon;
 import java.util.List;
 
@@ -23,6 +23,6 @@ public interface RegionPokemonRepository extends JpaRepository<RegionPokemon, Lo
 
     List<RegionPokemon> findByPokemonNameIgnoreCaseAndRegionNameIgnoreCase(String pokemon, String region);
 
-    boolean existsByPokemonIdAndRegionIdAndShiny(Long pokemonId, Long regionId, Boolean shiny);
+    boolean existsByPokemonIdAndRegionIdAndVariant(Long pokemonId, Long regionId, PokemonVariant variant);
 
 }
